@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Markdown Previewer</title>
+    <script src="./js/marked.js"></script>
+
+    <script>
+        console.log(marked.parse("# usefulProgrammer.org"));
+
+        function updatePreview() {
+            let previewElement = document.getElementById('preview');
+            let editorValue = document.getElementById('editor');
+            let markedUpHTML = marked.parse(editorValue.value)
+            previewElement.innerHTML = markedUpHTML;
+        }
+
+        function setDefault() {
+            let defaultText = `\
+# This is a H1
+## This is a H2
+[This is markdown](http://www.google.com)
+<dl>
+<dt>Definition list</dt>
+<dd>Is something people use sometimes.</dd>
+<dt>Markdown in HTML</dt>
+<dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>
+
+\`This is an example of inline code\`
+\`\`\`
+            var s = "JavaScript syntax highlighting";
+            alert(s);
+\`\`\`
+- This
+- is
+- an
+- example
+- of
+- list
+- items
+
+**This is an example of Bolded Text**
+
+>This is an example of quote
+ 
+![This is a cat-octopus image](https://myoctocat.com/assets/images/base-octocat.svg)
+`;
+
+            let editorField = document.getElementById('editor');
+            let previewElement = document.getElementById('preview');
+            editorField.value = defaultText;
+            previewElement.innerHTML = marked.parse(defaultText);
+        }
+    </script>
+</head>
+
+<body onload="setDefault()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center text-white bg-success py-3">
+                <h1>Markdown Previewer by Liviu</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 bg-primary d-flex flex-column">
+                <h2 class="text-white text-center my-3">Editor:</h2>
+                <div class="form-group flex-grow-1 d-flex flex-column">
+                    <textarea name="" id="editor" class="form-control flex-grow-1" onkeyup="updatePreview()" cols="50"
+                        rows=""></textarea>
+                </div>
+
+            </div>
+            <div class="col-6 bg-danger">
+                <h2 class="text-white text-center my-3">Preview:</h2>
+                <div id="preview"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+</body>
+
+</html>
